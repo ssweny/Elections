@@ -16,7 +16,7 @@ RunRankedChoiceElection(voters);
 static void RunSimpleElection(IReadOnlyList<IVoter> voters)
 {
     var ballots = SimpleBallotFactory.Create(voters, Candidates.Official);
-    RunElection<SimpleElection, ISimpleBallot>(ballots, "Simple Majority Election");
+    RunElection<SimplePluralityElection, ISimpleBallot>(ballots, "Simple Plurality Election");
 }
 
 static void RunRankedChoiceElection(IReadOnlyList<IVoter> voters)

@@ -13,7 +13,7 @@ public static class Candidates
     public static ICandidate SelectRandom(IReadOnlyList<ICandidate> candidates)
     {
         var candidatePool = UseWriteIn() ? _writeIns : candidates;
-        return candidatePool[Random.Shared.Next(candidatePool.Count)];
+        return candidatePool.Shuffle()[Random.Shared.Next(candidatePool.Count)];
     }
 
     private static IEnumerable<ICandidate> GenerateOfficial()
@@ -46,6 +46,21 @@ public static class Candidates
         var randomNumber = Random.Shared.Next();
         return randomNumber % _writeInFactor == 0;
     }
+
+    private static IReadOnlyList<ICandidate> Shuffle(this IReadOnlyList<ICandidate> candidates)
+    {
+        var shuffled = candidates.ToList();
+        var n = candidates.Count;
+        while (n > 1)
+        {
+            n--;
+            var k = Random.Shared.Next(n + 1);
+            (shuffled[n], shuffled[k]) = (shuffled[k], shuffled[n]);
+        }
+
+        return shuffled;
+    }
+
 
     private record Candidate(int Id, string Name) : ICandidate, IVoter;
 }

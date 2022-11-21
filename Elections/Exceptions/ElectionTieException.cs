@@ -22,11 +22,3 @@ public class ElectionTieException : Exception
         return $"A tie occurred between {candidates.Count()} candidates: {candidateList}";
     }
 }
-
-public class NoWinnerException : Exception
-{
-    public NoWinnerException() : base("No Winner determined")
-    {
-
-    }
-}

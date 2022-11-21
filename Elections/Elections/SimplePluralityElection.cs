@@ -1,9 +1,10 @@
 ﻿using Elections.Exceptions;
 using Elections.Objects;
+using static System.Collections.Specialized.BitVector32;
 
 namespace Elections.Elections;
 
-public class SimpleElection : IElection<ISimpleBallot>
+public class SimplePluralityElection : IElection<ISimpleBallot>
 {
     public ElectionResult Run(IReadOnlyList<ISimpleBallot> ballots, IReadOnlyList<ICandidate> candidates)
     {
