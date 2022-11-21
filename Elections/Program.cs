@@ -1,8 +1,10 @@
 ﻿using Elections;
-using Elections.Interfaces;
 using Elections.Ballots;
 using Elections.Elections;
 using System.Diagnostics;
+using Elections.Exceptions;
+using System.Reflection;
+using Elections.Objects;
 
 const int numVoters = 100_000;
 var voters = Voters.Create(numVoters, Candidates.Official);
@@ -28,9 +30,23 @@ static void RunElection<TElection, TBallot>(IReadOnlyList<TBallot> ballots, stri
     where TBallot : IBallot
 {
     var stopwatch = Stopwatch.StartNew();
+    try
+    {
+        var election = new TElection();
+        var result = election.Run(ballots, Candidates.Official);
+        PrintResult($"{electionDescription} - Winner is {result.Candidate.Name} with {result.VoteCount} votes", stopwatch.Elapsed);
+    }
+    catch (ElectionTieException tie)
+    {
+        PrintResult($"{electionDescription} - {tie.Message}", stopwatch.Elapsed);
+    }
+    catch (NoWinnerException noWinner)
+    {
+        PrintResult($"{electionDescription} - {noWinner.Message}", stopwatch.Elapsed);
+    }
+}
 
-    var election = new TElection();
-    var winner = election.Run(ballots, Candidates.Official);
-
-    Console.WriteLine($"The {electionDescription} winner is {winner?.Name} [{stopwatch.Elapsed.TotalMilliseconds} ms]");
+static void PrintResult(string message, TimeSpan elapsed)
+{
+    Console.WriteLine($"{message} [{elapsed.TotalMilliseconds} ms]");
 }

@@ -1,4 +1,4 @@
-﻿using Elections.Interfaces;
+﻿using Elections.Objects;
 
 namespace Elections;
 

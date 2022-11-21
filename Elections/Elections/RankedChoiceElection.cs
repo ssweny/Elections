@@ -1,11 +1,12 @@
-﻿using Elections.Interfaces;
+﻿using Elections.Exceptions;
+using Elections.Objects;
 
 namespace Elections.Elections;
 
 public class RankedChoiceElection : IElection<IRankedChoiceBallot>
 {
-    public ICandidate Run(IReadOnlyList<IRankedChoiceBallot> ballots, IReadOnlyList<ICandidate> candidates)
+    public ElectionResult Run(IReadOnlyList<IRankedChoiceBallot> ballots, IReadOnlyList<ICandidate> candidates)
     {
-        return null;
+        throw new NoWinnerException();
     }
 }

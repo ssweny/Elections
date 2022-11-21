@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Elections.Interfaces;
+namespace Elections.Objects;
 
 public interface IBallot
 {

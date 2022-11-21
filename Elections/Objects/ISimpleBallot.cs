@@ -1,4 +1,4 @@
-﻿namespace Elections.Interfaces;
+﻿namespace Elections.Objects;
 
 public interface ISimpleBallot : IBallot
 {

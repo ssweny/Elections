@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Linq;
-using Elections.Interfaces;
+using Elections.Objects;
 
 namespace Elections.Ballots;
 
